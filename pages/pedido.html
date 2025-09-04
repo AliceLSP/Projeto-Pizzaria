@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/pedido.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <title>Pedido</title>
+</head>
+<body>
+    <h1>Resumo do Pedido</h1>
+    <fieldset>
+        <h3>Tamanho</h3>
+        <div id="tamanho">
+
+        </div>
+        <h3>Sabor</h3>
+        <div id="sabor">
+
+        </div>
+        <h3>Adicionais</h3>
+        <div id="adicionais">
+
+        </div>
+        <h3>Borda</h3>
+        <div id="borda">
+
+        </div>
+    </fieldset>
+    <a href="/"><button>Finalizar</button></a>
+
+    <script>
+        let tamanhoDiv = document.querySelector('#tamanho')
+        let saborDiv = document.querySelector('#sabor')
+        let adicionaisDiv = document.querySelector('#adicionais')
+        let bordaDiv = document.querySelector('#borda')
+
+        const pedido = JSON.parse(localStorage.getItem('pedido'));
+
+        if (pedido) {
+            tamanhoDiv.textContent = pedido.tamanho || 'Não selecionado';
+            saborDiv.textContent = pedido.sabor || 'Não selecionado';
+            bordaDiv.textContent = pedido.borda || 'Não selecionado';
+
+            adicionaisDiv.textContent = pedido.adicionais && pedido.adicionais.length > 0 ? pedido.adicionais.join(' , ') : 'Nenhum adicional';
+        } else {
+
+            tamanhoDiv.textContent = 'Nenhum pedido encontrado';
+            saborDiv.textContent = 'Nenhum pedido encontrado';
+            adicionaisDiv.textContent = 'Nenhum pedido encontrado';
+            bordaDiv.textContent = 'Nenhum pedido encontrado';
+        }
+    </script>
+</body>
+</html>

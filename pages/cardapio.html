@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/cardapio.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <title>Cardapio</title>
+</head>
+<body>
+    <h1>Cardapio</h1>
+    <p>Escolha seu pedido</p>
+    <form action="/pedido">
+        <fieldset>
+            <h2>Tamanho</h2>
+            <label for="radio-tam-grande">Grande</label>
+            <input type="radio" name="radio-tam" id="radio-tam-grande" value="Grande">
+            <label for="radio-tam-pequeno">Pequeno</label>
+            <input type="radio" name="radio-tam" id="radio-tam-pequeno" value="Pequeno">
+        </fieldset>
+        <fieldset>
+            <h2>Sabor</h2>
+            <label for="radio-sabor-fc">Frango e Catupiry</label>
+            <input type="radio" name="radio-sabor" id="radio-sabor-fc" value="Frango e Catupiry">
+            <label for="radio-sabor-calabresa">Calabresa</label>
+            <input type="radio" name="radio-sabor" id="radio-sabor-calabresa" value="Calabresa">
+        </fieldset>
+        <fieldset>
+            <h2>Adicionais</h2>
+            <label for="checkbox-adic-queijo">Queijo</label>
+            <input type="checkbox" name="checkbox-adic" id="checkbox-adic-queijo" value="Queijo">
+            <label for="checkbox-adic-pimenta">Pimenta</label>
+            <input type="checkbox" name="checkbox-adic" id="checkbox-adic-pimenta" value="Pimenta">
+        </fieldset>
+        <fieldset>
+            <h2>Borda</h2>
+            <label for="radio-borda-catupiry">Catupiry</label>
+            <input type="radio" name="radio-borda" id="radio-borda-catupiry" value="Catupiry">
+            <label for="radio-borda-choco">Chocolate</label>
+            <input type="radio" name="radio-borda" id="radio-borda-choco" value="Chocolate">
+        </fieldset>
+        <button type="submit">Terminar</button>
+    </form>
+    <a href="/"><button class="cancelar-btn">Cancelar</button></a>
+
+    <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const tamanho = form.querySelector('input[name="radio-tam"]:checked');
+        const tamanhoValor = tamanho ? tamanho.value : null;
+
+        const sabor = form.querySelector('input[name="radio-sabor"]:checked');
+        const saborValor = sabor ? sabor.value : null;
+
+        const adicionais = Array.from(form.querySelectorAll('input[name="checkbox-adic"]:checked'))
+        .map(checkbox => checkbox.value);
+
+        const borda = form.querySelector('input[name="radio-borda"]:checked');
+        const bordaValor = borda ? borda.value : null;
+
+        const pedido = {
+            tamanho: tamanhoValor,
+            sabor: saborValor,
+            adicionais: adicionais,
+            borda: bordaValor
+        };
+
+        // Salvar no localStorage (convertendo para string JSON)
+        localStorage.setItem('pedido', JSON.stringify(pedido));
+
+        window.location.href = '/pedido';
+    });
+
+    </script>
+</body>
+</html>

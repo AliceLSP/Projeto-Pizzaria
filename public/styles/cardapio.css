@@ -1,0 +1,10 @@
+form {
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+fieldset{
+    background-color: #fff;
+    border-radius: 10px;
+}
